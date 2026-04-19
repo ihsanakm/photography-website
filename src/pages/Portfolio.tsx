@@ -67,7 +67,7 @@ const Portfolio = () => {
 
       timeline.current = gsap.timeline();
 
-      gsap.set(".img-reveal", { clipPath: "inset(100% 0 0 0)" });
+      gsap.set(".img-reveal", { filter: "blur(3px)" });
 
       // 1. Animate Counter Digits [7]
       const counterObj = { val: 0 };
@@ -88,7 +88,8 @@ const Portfolio = () => {
 
       // 2. Reveal the Image by sliding the dark blocks away [3]
       timeline.current.to(".img-reveal", {
-        clipPath: "inset(0% 0 0 0)", // reveal from bottom to top
+        clipPath: "inset(0% 0% 0% 0%)",
+        filter: "blur(0px)",
         duration: 1.5,
         ease: "power2.inOut",
       });
@@ -120,10 +121,10 @@ const Portfolio = () => {
           </div>
           <div className="hero-image-wrap">
             <div className="loader">
-              <div className="counter">
-                <span className="count-display">0% </span>
-              </div>
               <div className="img-reveal">
+                <div className="counter">
+                  <span className="count-display">0% </span>
+                </div>
                 <img src={images[0]} alt="Mariam & Karen" />
               </div>{" "}
             </div>

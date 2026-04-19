@@ -3,7 +3,7 @@ import HoverText from "./HoverText";
 const Header = () => {
   return (
     <header
-      className="w-full flex justify-between items-center sticky top-6 z-7 px-8 py-6"
+      className="w-full flex justify-between items-center sticky top-6 z-7 px-8 pb-6"
       style={{ mixBlendMode: "difference" }}
     >
       <HoverText>Menu</HoverText>

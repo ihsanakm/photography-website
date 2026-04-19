@@ -1,28 +1,44 @@
 import gsap from "gsap";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 const HoverText = ({ children }: { children: React.ReactNode }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const spanRef1 = useRef<HTMLSpanElement>(null);
   const spanRef2 = useRef<HTMLSpanElement>(null);
 
-  const handleMouseOver = useCallback(() => {
-    gsap.to([spanRef1.current, spanRef2.current], {
-      yPercent: -100,
-      duration: 0.2,
-    });
-  }, []);
+  useGSAP(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-  const handleMouseOverLeave = useCallback(() => {
-    gsap.to([spanRef1.current, spanRef2.current], {
-      yPercent: 0,
-      duration: 0.2,
-    });
-  }, []);
+    const handleMouseOver = () => {
+      gsap.to([spanRef1.current, spanRef2.current], {
+        yPercent: -100,
+        duration: 0.2,
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to([spanRef1.current, spanRef2.current], {
+        yPercent: 0,
+        duration: 0.2,
+      });
+    };
+
+    container.addEventListener("mouseenter", handleMouseOver);
+    container.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      container.removeEventListener("mouseenter", handleMouseOver);
+      container.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  });
 
   return (
     <div
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseOverLeave}
+      ref={containerRef}
       className="text-container h-4 overflow-hidden flex flex-col"
     >
       <span ref={spanRef1} className="text">

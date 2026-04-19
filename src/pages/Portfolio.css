@@ -434,15 +434,14 @@ body {
   clip-path: inset(100% 0 0 0);
   will-change: clip-path;
   width: 100%;
-  /* add this */
   height: 100%;
-  /* add this */
-}
+  display: flex;
+  justify-content: center;}
 
 .img-reveal img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   /* overlay filter */
-  filter: brightness(5%);
+  /* filter: blur(3px) brightness(0.7); */
 }
