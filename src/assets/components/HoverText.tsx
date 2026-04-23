@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-const HoverText = ({ children }: { children: React.ReactNode }) => {
+const HoverText = ({ children, classname }: { children: React.ReactNode, classname?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const spanRef1 = useRef<HTMLSpanElement>(null);
   const spanRef2 = useRef<HTMLSpanElement>(null);
@@ -39,7 +39,7 @@ const HoverText = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       ref={containerRef}
-      className="text-container h-4 overflow-hidden flex flex-col"
+      className={`text-container h-[1.1em] overflow-hidden flex flex-col uppercase font-semibold ${classname || "text-white text-base"}`}
     >
       <span ref={spanRef1} className="text">
         {children}

@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, type Dispatch } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+
 
 gsap.registerPlugin(useGSAP);
 
@@ -100,6 +101,11 @@ export default function Grid() {
   const introContainerRef = useRef<HTMLDivElement>(null); // box 1
   const mainContainerRef = useRef<HTMLDivElement>(null); // box 2
 
+  const STATION_Y = 30;
+  const INTERNAL_GAP = -12;
+  const mainStationY = STATION_Y + INTERNAL_GAP;
+
+
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
@@ -116,13 +122,12 @@ export default function Grid() {
         const main = mainContainerRef.current;
 
         // Calculate dynamic stopping point
-        const STATION_Y = 30; // The fixed line 30px from top
+        // The fixed line 30px from top
 
         // Because both grids have padding: 12px, standing them next to each other
         // creates a 24px gap. We use -12px to overlap the padding, leaving exactly
         // a 12px space between the actual image cards!
-        const INTERNAL_GAP = -12;
-        const mainStationY = STATION_Y + INTERNAL_GAP;
+
 
         const allCols = [
           ...introColRefs.slice(0, isMobile ? 2 : 3).map((r) => r.current),
@@ -171,8 +176,8 @@ export default function Grid() {
             ease: "power2.in",
             onComplete: () => {
               gsap.set(main, {
-                y: 0,
-                paddingTop: mainStationY,
+                // y: 0,
+                // paddingTop: mainStationY,
               });
             },
           });
@@ -198,24 +203,28 @@ export default function Grid() {
       </div>
 
       {/* Main Box — moves independently */}
+
       <div
-        ref={mainContainerRef}
         className="hide-scrollbar"
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
-          height: `calc(100vh - 42px)`,
-          overflowY: "auto",
+          height: "100vh",
+          overflow: "auto",
         }}
       >
-        <GridColumns
-          hoveredIndex={hoveredIndex}
-          setHoveredIndex={setHoveredIndex}
-          colRefs={realColRefs}
-          colCount={colCount}
-        />
+        <div ref={mainContainerRef}>
+          <div>
+            <GridColumns
+              hoveredIndex={hoveredIndex}
+              setHoveredIndex={setHoveredIndex}
+              colRefs={realColRefs}
+              colCount={colCount}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

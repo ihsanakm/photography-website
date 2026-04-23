@@ -8,7 +8,6 @@
 .text {
   font-kerning: none;
   text-rendering: optimizeSpeed;
-  font-size: 1rem;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -18,8 +17,14 @@
 }
 
 .text-brand {
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .text-brand {
+    font-size: 2rem;
+  }
 }
 
 .text-user {
@@ -28,7 +33,6 @@
 
 }
 
-.text,
 .text-brand,
 .text-user {
   color: #fff;
