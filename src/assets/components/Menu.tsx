@@ -101,7 +101,7 @@ const Menu = ({ ref, setMenuOpen }: { ref: React.RefObject<HTMLDivElement | null
               <p className="text-xs text-gray-500 uppercase mb-4">Follow Us</p>
               <div className="flex flex-wrap gap-x-6 gap-y-2 md:flex-col md:space-y-2">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/i_am_ihzan?igsh=bjZndjVobjExbWU5&utm_source=qr"
                   className="text-gray-400 hover:text-white transition-colors block text-base md:text-sm"
                 >
                   Instagram
@@ -113,7 +113,7 @@ const Menu = ({ ref, setMenuOpen }: { ref: React.RefObject<HTMLDivElement | null
                   Twitter
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/mohammed-ihsan-b37890232"
                   className="text-gray-400 hover:text-white transition-colors block text-base md:text-sm"
                 >
                   LinkedIn

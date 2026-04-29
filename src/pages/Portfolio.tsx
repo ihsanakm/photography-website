@@ -6,10 +6,12 @@ import { Observer } from "gsap/dist/Observer";
 import "./Portfolio.css";
 
 const images = [
-  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-230-1-687d4d7e4613a.webp",
-  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-230-1-687d4d7e4613a.webp",
-  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-230-1-687d4d7e4613a.webp",
-  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-230-1-687d4d7e4613a.webp",
+  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80",
+  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-80-687d4d0e1dce4.webp",
+  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80",
+  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-554-687d4d1b1ddb8.webp",
+  "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80",
 ];
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, Observer);
@@ -24,46 +26,88 @@ const Portfolio = () => {
       const el = containerRef.current;
       if (!el) return;
 
-      ScrollTrigger.defaults({ scroller: el });
+      const mm = gsap.matchMedia();
 
-      const obs = Observer.create({
-        target: el,
-        type: "wheel,touch",
-        onChangeX: (self) => {
-          gsap.to(el, {
-            scrollLeft: el.scrollLeft + self.deltaX * 3,
-            duration: 0.5,
-            ease: "power2.out",
-          });
+      mm.add(
+        {
+          isDesktop: "(min-width: 769px)",
+          isMobile: "(max-width: 768px)",
         },
-        onChangeY: (self) => {
-          gsap.to(el, {
-            scrollLeft: el.scrollLeft + self.deltaY * 3,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        },
-        preventDefault: true,
-      });
+        (context) => {
+          const { isDesktop } = context.conditions as { isDesktop: boolean };
 
-      gsap.utils.toArray<HTMLElement>(".gallery-item").forEach((item) => {
-        gsap.fromTo(
-          item,
-          { x: 100, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: item,
-              horizontal: true,
-              start: "left 90%",
-              end: "left 50%",
-              scrub: true,
-            },
-          },
-        );
-      });
+          if (isDesktop) {
+            ScrollTrigger.defaults({ scroller: el });
+
+            const obs = Observer.create({
+              target: el,
+              type: "wheel,touch",
+              onChangeX: (self) => {
+                gsap.to(el, {
+                  scrollLeft: el.scrollLeft + self.deltaX * 3,
+                  duration: 0.5,
+                  ease: "power2.out",
+                });
+              },
+              onChangeY: (self) => {
+                gsap.to(el, {
+                  scrollLeft: el.scrollLeft + self.deltaY * 3,
+                  duration: 0.5,
+                  ease: "power2.out",
+                });
+              },
+              preventDefault: true,
+            });
+
+            gsap.utils.toArray<HTMLElement>(".gallery-item").forEach((item) => {
+              gsap.fromTo(
+                item,
+                { x: 100, opacity: 0 },
+                {
+                  x: 0,
+                  opacity: 1,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: item,
+                    horizontal: true,
+                    start: "left 90%",
+                    end: "left 50%",
+                    scrub: true,
+                  },
+                },
+              );
+            });
+
+            return () => obs.kill();
+          } else {
+            // Premium Mobile Vertical Animations
+            gsap.utils.toArray<HTMLElement>(".gallery-item").forEach((item) => {
+              gsap.fromTo(
+                item,
+                { 
+                  y: 100, 
+                  opacity: 0,
+                  scale: 0.95,
+                  filter: "blur(5px)"
+                },
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  filter: "blur(0px)",
+                  ease: "expo.out",
+                  scrollTrigger: {
+                    trigger: item,
+                    start: "top 95%",
+                    end: "top 70%",
+                    scrub: 1,
+                  },
+                },
+              );
+            });
+          }
+        },
+      );
 
       timeline.current = gsap.timeline();
 
@@ -93,8 +137,6 @@ const Portfolio = () => {
         duration: 1.5,
         ease: "power2.inOut",
       });
-
-      return () => obs.kill();
     },
     { scope: containerRef },
   );
@@ -114,7 +156,7 @@ const Portfolio = () => {
                 meaningful, it was proudly featured in Vogue.
               </p>
             </div>
-            <div className="hero-bottom">
+            <div className="hero-bottom text-center md:text-start">
               <p className="featured-label">As featured in</p>
               <p className="vogue-text">Vogue</p>
             </div>
@@ -133,7 +175,7 @@ const Portfolio = () => {
 
         {/* Gallery Panel */}
         <div className="panel-gallery">
-          <span className="gallery-label">Gallery</span>
+          <span className="gallery-label md:text-start text-center">Gallery</span>
           <div className="gallery-images">
             {images.map((src, i) => (
               <div
@@ -152,15 +194,15 @@ const Portfolio = () => {
 
         {/* Next Project Panel */}
         <div className="panel-next">
-          <p className="next-label">Next Project</p>
-          <h2 className="next-title">
+          <p className="next-label w-full text md:text-start text-center">Next Project</p>
+          <h2 className="next-title w-full text md:text-start text-center">
             Ani
             <br />& Artur
           </h2>
-          <p className="next-location">Dilijan, Armenia</p>
-          <button className="next-btn">
-            View Project
-            <span className="next-btn-arrow" />
+          <p className="next-location w-full text md:text-start text-center">Dilijan, Armenia</p>
+          <button className="next-btn md:text-start text-center justify-center flex md:mx-0 mx-auto">
+            View Project  
+            <span className="next-btn-arrow ml-2" />
           </button>
         </div>
       </div>

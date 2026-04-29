@@ -5,8 +5,14 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-const IMAGE =
-  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-230-1-687d4d7e4613a.webp";
+const IMAGES = [
+  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
+  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-554-687d4d1b1ddb8.webp",
+  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
+  "https://api.avagyanphoto.com/storage/webp/avagyanwedding-M-K-80-687d4d0e1dce4.webp",
+  "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80",
+];
 
 interface GridColumnsProps {
   hoveredIndex: number | null;
@@ -59,7 +65,7 @@ const GridColumns = ({
               >
                 <a href="/portfolio">
                   <img
-                    src={IMAGE}
+                    src={IMAGES[index % IMAGES.length]}
                     alt="portfolio"
                     draggable={false}
                     style={{
@@ -211,7 +217,7 @@ export default function Grid() {
           top: 0,
           left: 0,
           width: "100%",
-          height: "100vh",
+          height: "100svh",
           overflow: "auto",
         }}
       >

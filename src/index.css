@@ -1,8 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #ffffff;
+  --color-black-gradient: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
 html {
   scroll-behavior: smooth;
+  height: 100%;
+  width: 100%;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   transition: background-color 0.3s ease;
 }
 
@@ -14,4 +27,31 @@ body {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Branding & Utility Styles */
+.text-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+@media (min-width: 768px) {
+  .text-brand {
+    font-size: 2rem;
+  }
+}
+
+.text-user {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.text-premium {
+  font-kerning: none;
+  text-rendering: optimizeSpeed;
+  text-transform: uppercase;
+  font-weight: 600;
 }

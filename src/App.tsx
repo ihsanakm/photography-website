@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./assets/components/Header";
 import { Routes, Route } from "react-router";
 import Portfolio from "./pages/Portfolio";
@@ -60,13 +59,52 @@ function App() {
     }
   }, [menuOpen]);
 
-  // Close menu on scroll or outside click
+  // Device-specific menu scroll behavior
   useGSAP(() => {
-    if (!menuOpen) return;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (menuOpen) {
+      if (isMobile) {
+        // On Mobile: Disable scroll
+        document.body.style.overflow = "hidden";
+      } else {
+        // On Desktop: Allow scroll but close menu on scroll
+        const handleScroll = () => setMenuOpen(false);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+      }
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [menuOpen]);
+
+  // Hide header on scroll down, show on scroll up
+  useGSAP(() => {
+    let lastScrollY = window.scrollY;
+    const header = document.querySelector("header");
+    if (!header) return;
 
     const handleScroll = () => {
-      setMenuOpen(false);
+      const currentScrollY = window.scrollY;
+      if (menuOpen) return;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down
+        gsap.to(header, { y: -100, autoAlpha: 0, duration: 0.3, ease: "power2.inOut" });
+      } else {
+        // Scrolling up
+        gsap.to(header, { y: 0, autoAlpha: 1, duration: 0.3, ease: "power2.inOut" });
+      }
+      lastScrollY = currentScrollY;
     };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
+
+  // Close menu on outside click
+  useGSAP(() => {
+    if (!menuOpen) return;
 
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -78,11 +116,9 @@ function App() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, true);
     window.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll, true);
       window.removeEventListener("mousedown", handleClickOutside);
     };
   }, [menuOpen]);
