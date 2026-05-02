@@ -1,4 +1,4 @@
-import { useState, useRef, type Dispatch } from "react";
+import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 

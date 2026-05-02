@@ -12,12 +12,13 @@ const Header = ({
       className="w-full flex justify-between items-center sticky top-2 md:top-6 z-7 px-3 md:px-[12px] pb-4 pt-1 md:py-6"
       style={{ mixBlendMode: "difference" }}
     >
-      <div
-        className="cursor-pointer"
+      <button
+        className="cursor-pointer bg-transparent border-none p-0 outline-none"
         onClick={() => setMenuOpen((prev) => !prev)}
+        aria-label="Toggle Menu"
       >
         <HoverText>Menu</HoverText>
-      </div>
+      </button>
       <Link to="/">
         <p className="text-brand leading-none">AKMi's</p>
       </Link>
@@ -26,6 +27,7 @@ const Header = ({
         target="_blank" 
         rel="noopener noreferrer"
         className="flex items-center"
+        aria-label="LinkedIn Profile"
       >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
