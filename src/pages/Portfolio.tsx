@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Observer } from "gsap/dist/Observer";
+import { Observer } from "gsap/Observer";
 import "./Portfolio.css";
 
 const images = [
