@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Observer } from "gsap/Observer";
+import { Observer } from "gsap/all";
 import "./Portfolio.css";
 
 const images = [
@@ -42,14 +42,14 @@ const Portfolio = () => {
             const obs = Observer.create({
               target: el,
               type: "wheel,touch",
-              onChangeX: (self) => {
+              onChangeX: (self: any) => {
                 gsap.to(el, {
                   scrollLeft: el.scrollLeft + self.deltaX * 3,
                   duration: 0.5,
                   ease: "power2.out",
                 });
               },
-              onChangeY: (self) => {
+              onChangeY: (self: any) => {
                 gsap.to(el, {
                   scrollLeft: el.scrollLeft + self.deltaY * 3,
                   duration: 0.5,

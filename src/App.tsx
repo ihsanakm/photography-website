@@ -5,12 +5,14 @@ import NotFound from "./pages/NotFound";
 import Grid from "./assets/components/Grid";
 import { useState, useRef } from "react";
 import Menu from "./assets/components/Menu";
+import LoadingScreen from "./assets/components/LoadingScreen";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const appRef = useRef<HTMLDivElement>(null);
@@ -125,18 +127,25 @@ function App() {
   }, [menuOpen]);
 
   return (
-    <div ref={appRef} className=" relative bg-white">
-      <Menu ref={menuRef} setMenuOpen={setMenuOpen} />
-      <Header setMenuOpen={setMenuOpen} />
-      <Routes>
-        <Route
-          path="/"
-          element={<Grid />}
-        />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <>
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      <div 
+        ref={appRef} 
+        className="relative bg-white"
+        style={{ visibility: isLoading ? "hidden" : "visible" }}
+      >
+        <Menu ref={menuRef} setMenuOpen={setMenuOpen} />
+        <Header setMenuOpen={setMenuOpen} />
+        <Routes>
+          <Route
+            path="/"
+            element={!isLoading && <Grid />}
+          />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
