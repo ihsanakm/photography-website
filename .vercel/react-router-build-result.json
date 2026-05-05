@@ -1,0 +1,102 @@
+{
+  "buildManifest": {
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "pages/Home": {
+        "id": "pages/Home",
+        "parentId": "root",
+        "file": "pages/Home.tsx",
+        "index": true
+      },
+      "pages/Portfolio": {
+        "id": "pages/Portfolio",
+        "parentId": "root",
+        "file": "pages/Portfolio.tsx",
+        "path": "portfolio"
+      },
+      "pages/NotFound": {
+        "id": "pages/NotFound",
+        "parentId": "root",
+        "file": "pages/NotFound.tsx",
+        "path": "*"
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "D:/FE/gsap/photo/app",
+    "basename": "/",
+    "buildDirectory": "D:/FE/gsap/photo/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_passThroughRequests": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "pages/Home": {
+        "id": "pages/Home",
+        "parentId": "root",
+        "file": "pages/Home.tsx",
+        "index": true
+      },
+      "pages/Portfolio": {
+        "id": "pages/Portfolio",
+        "parentId": "root",
+        "file": "pages/Portfolio.tsx",
+        "path": "portfolio"
+      },
+      "pages/NotFound": {
+        "id": "pages/NotFound",
+        "parentId": "root",
+        "file": "pages/NotFound.tsx",
+        "path": "*"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "initial"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": false,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "pages/Home.tsx",
+            "index": true
+          },
+          {
+            "file": "pages/Portfolio.tsx",
+            "path": "portfolio"
+          },
+          {
+            "file": "pages/NotFound.tsx",
+            "path": "*"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}

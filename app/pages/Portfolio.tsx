@@ -1,9 +1,17 @@
+import type { MetaFunction } from "react-router";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/all";
 import "./Portfolio.css";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Portfolio | AKMi's Photography" },
+    { name: "description", content: "Explore the premium photography portfolio by AKMi, featuring featured works like Mariam & Karen's Vogue-featured wedding." },
+  ];
+};
 
 const images = [
   "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
